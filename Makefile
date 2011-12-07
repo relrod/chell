@@ -1,4 +1,4 @@
-CFLAGS=-std=gnu99
+CFLAGS=-std=gnu99 -g -Wall -Wextra -pedantic
 LDFLAGS=-lreadline
 
 chell: chell.c
