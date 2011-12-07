@@ -25,7 +25,12 @@ int main()
     perror("Could not get password file entry");
     return 1;
   }
-  getcwd(directory, 255);
+
+  if(getcwd(directory, PATH_MAX) != directory) {
+    perror("Could not get current directory");
+    return 2;
+  }
+
 
   printf("--------------------------------------\n");
   printf("Chell. Don't trust this shell. at all.\n");
