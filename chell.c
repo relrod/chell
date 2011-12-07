@@ -5,6 +5,7 @@
 #include <pwd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <errno.h>
 
 int main()
 {
@@ -13,8 +14,17 @@ int main()
   struct passwd *passwd = NULL;
   char directory[PATH_MAX] = { 0 };
 
-  gethostname(hostname, sizeof(hostname));
+  if(gethostname(hostname, sizeof(hostname)) < 0) {
+    fprintf(stderr, "Could not get hostname\n");
+    strcpy(hostname, "HOSTNAME");
+  }
+
+  errno = 0;
   passwd = getpwuid(getuid());
+  if(passwd == NULL) {
+    perror("Could not get password file entry");
+    return 1;
+  }
   getcwd(directory, 255);
 
   printf("--------------------------------------\n");
