@@ -1,8 +1,7 @@
-CC=gcc
-CFLAGS=-lreadline
+LDFLAGS=-lreadline
 
-chell:
-	$(CC) $(CFLAGS) -o chell chell.c
+chell: chell.c
+	$(CC) $(LDFLAGS) -o chell chell.c
 
 clean:
 	rm -fv chell
