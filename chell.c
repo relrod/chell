@@ -39,10 +39,11 @@ int main()
   printf("And yes, it is cheating.\n");
   printf("--------------------------------------\n");
 
+  using_history();
   do {
     gethostname(hostname, sizeof(hostname));
     passwd = getpwuid(getuid());
-    getcwd(directory, 255);
+    getcwd(directory, PATH_MAX);
 
     int prompt_len = snprintf(NULL, 0, "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
     char prompt[prompt_len + 1];
@@ -57,4 +58,7 @@ int main()
     }
 
   } while (1);
+
+  clear_history();
+  return 0;
 }
