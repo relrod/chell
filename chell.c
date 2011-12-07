@@ -41,10 +41,12 @@ int main()
 
   using_history();
   do {
+    // TODO: handle possible errors here
     gethostname(hostname, sizeof(hostname));
     passwd = getpwuid(getuid());
     getcwd(directory, PATH_MAX);
 
+    // TODO: is there a way to restructure this?
     int prompt_len = snprintf(NULL, 0, "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
     char prompt[prompt_len + 1];
     snprintf(prompt, sizeof(prompt), "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
