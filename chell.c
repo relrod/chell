@@ -42,10 +42,10 @@ int main()
     int prompt_len = snprintf(NULL, 0, "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
     char prompt[prompt_len + 1];
     snprintf(prompt, sizeof(prompt), "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
- 
+
     input = readline(prompt);
     add_history(input);
-    system(input);    
+    system(input);
 
     if (strcmp(input, "exit") == 0) {
       return 1;
