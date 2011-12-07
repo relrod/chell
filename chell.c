@@ -8,10 +8,10 @@
 
 int main()
 {
-  char hostname[_POSIX_HOST_NAME_MAX + 1];
-  char *input;
-  struct passwd *passwd;
-  char directory[255];
+  char hostname[_POSIX_HOST_NAME_MAX + 1] = { 0 };
+  char *input = NULL;
+  struct passwd *passwd = NULL;
+  char directory[PATH_MAX] = { 0 };
 
   gethostname(hostname, sizeof(hostname));
   passwd = getpwuid(getuid());
