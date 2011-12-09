@@ -8,6 +8,9 @@
 #include <errno.h>
 #include <bits/posix1_lim.h>
 
+// TODO: alternate handling?
+extern int gethostname(char *, size_t);
+
 int main()
 {
   char hostname[_POSIX_HOST_NAME_MAX + 1] = { 0 };
