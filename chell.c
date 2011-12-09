@@ -49,13 +49,15 @@ int main()
         passwd->pw_name, hostname, directory);
 
     input = readline(prompt);
+    if(input == NULL) {
+       return 0;
+    }
     add_history(input);
     system(input);
 
-    if (strcmp(input, "exit") == 0) {
-      return 1;
+    if(strcmp(input, "exit") == 0) {
+       return 0;
     }
-
   } while (1);
 
   clear_history();
