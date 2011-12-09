@@ -15,23 +15,10 @@ int main()
   struct passwd *passwd = NULL;
   char directory[PATH_MAX] = { 0 };
 
-  if(gethostname(hostname, sizeof(hostname)) < 0) {
-    fprintf(stderr, "Could not get hostname\n");
-    strcpy(hostname, "HOSTNAME");
-  }
-
-  errno = 0;
-  passwd = getpwuid(getuid());
-  if(passwd == NULL) {
-    perror("Could not get password file entry");
-    return 1;
-  }
-
   if(getcwd(directory, PATH_MAX) != directory) {
     perror("Could not get current directory");
     return 2;
   }
-
 
   printf("--------------------------------------\n");
   printf("Chell. Don't trust this shell. at all.\n");
@@ -42,10 +29,18 @@ int main()
 
   using_history();
   do {
-    // TODO: handle possible errors here
-    gethostname(hostname, sizeof(hostname));
-    passwd = getpwuid(getuid());
-    getcwd(directory, PATH_MAX);
+    if(gethostname(hostname, sizeof(hostname)) < 0) {
+      fprintf(stderr, "Could not get hostname\n");
+      strncpy(hostname, "HOSTNAME", _POSIX_HOST_NAME_MAX);
+    }
+    if((passwd = getpwuid(getuid())) == NULL) {
+      perror("Could not get password file entry");
+      return 1;
+    }
+    if(getcwd(directory, PATH_MAX) != directory) {
+      perror("Could not get current directory");
+      return 2;
+    }
 
     // TODO: is there a way to restructure this?
     int prompt_len = snprintf(NULL, 0, "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
