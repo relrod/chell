@@ -1,8 +1,9 @@
-CFLAGS=-std=gnu99 -g -Wall -Wextra -pedantic
+CFLAGS=-std=c99 -g -Wall -Wextra -pedantic
 LDFLAGS=-lreadline
 
 chell: chell.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ chell.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 clean:
-	rm -fv chell
+	rm -f chell *.o
+
