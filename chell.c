@@ -42,10 +42,11 @@ int main()
       return 2;
     }
 
-    // TODO: is there a way to restructure this?
-    int prompt_len = snprintf(NULL, 0, "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
+    int prompt_len = snprintf(NULL, 0, "(chell) [%s@%s %s]$ ",
+        passwd->pw_name, hostname, directory);
     char prompt[prompt_len + 1];
-    snprintf(prompt, sizeof(prompt), "(chell) [%s@%s %s]$ ", passwd->pw_name, hostname, directory);
+    snprintf(prompt, sizeof(prompt), "(chell) [%s@%s %s]$ ",
+        passwd->pw_name, hostname, directory);
 
     input = readline(prompt);
     add_history(input);
@@ -60,3 +61,5 @@ int main()
   clear_history();
   return 0;
 }
+
+// vim: ts=2: et:
