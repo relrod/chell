@@ -1,7 +1,9 @@
+CFLAGS=-std=c99 -g -Wall -Wextra -pedantic
 LDFLAGS=-lreadline
 
 chell: chell.c
-	$(CC) $(LDFLAGS) -o chell chell.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 clean:
-	rm -fv chell
+	rm -f chell *.o
+
